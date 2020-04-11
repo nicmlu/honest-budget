@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  store_name: MyString
+  amount: 1.5
+  date: 
+  user: one
+
+two:
+  store_name: MyString
+  amount: 1.5
+  date: 
+  user: two
