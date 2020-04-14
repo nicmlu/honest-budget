@@ -1,0 +1,7 @@
+<h1>Transaction Details:</h1>
+<p> Store Name: <%= @transaction.store_name %></p>
+<p> Date: <%= @transaction.date.strftime('%a, %b %d, %Y') %> </p>
+<p> Amount: <%= @transaction.amount %> </p>
+
+<%= link_to "Edit Transaction", edit_user_transaction_path, method:'get'  %> | 
+<%= link_to "Delete Transaction", @transaction, method: :delete, data: { confirm: "Are you sure?", disable_with: "Processing..." } %> 

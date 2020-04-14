@@ -1,0 +1,20 @@
+<h1>Transaction</h1>
+<%= form_for(@transaction) do |f|%>
+<%= f.label :store_name %>
+<%= f.text_field :store_name %>
+<br>
+<br>
+<%= f.label :date %>
+<%= f.date_field :date %>
+<br>
+<br>
+<%= f.label :amount %>
+<%= f.text_field :amount %>
+<br>
+<br>
+<%= f.label :category %>
+<%= f.collection_select :category_ids, Category.all, :id, :name %>
+<br>
+<br>
+<%= f.submit%>
+<% end %>

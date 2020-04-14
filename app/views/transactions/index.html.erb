@@ -1,0 +1,7 @@
+<h1> All Transactions </h1>
+
+<% @transactions.each do |transaction|%>
+<ul>
+<li> <%= link_to transaction.amount, user_transaction_path(current_user, transaction) %>  spent at <%= transaction.store_name %> on <%= transaction.date.strftime('%a, %b %d, %Y') %></li>
+</ul>
+<% end %>
