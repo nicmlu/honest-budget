@@ -1,0 +1,32 @@
+<h1>Budget</h1>
+<%= form_for(@budget) do |f|%>
+<%= f.label :name %>
+<%= f.text_field :name %>
+<br>
+<br>
+<%= f.label :income %>
+<%= f.number_field :income %>
+<br>
+<br>
+<%= f.label :expenses %>
+<%= f.number_field :expenses %>
+<br>
+<br>
+<%= f.label :start_date %>
+<%= f.date_field :start_date %>
+<br>
+<br>
+<%= f.label :end_date %>
+<%= f.date_field :end_date %>
+<br>
+<br>
+<%= f.label :content %>
+<%= f.text_field :content %>
+<br>
+<br>
+<%= f.label :notes %>
+<%= f.text_field :notes %>
+<br>
+<br>
+<%= f.submit%>
+<% end %>

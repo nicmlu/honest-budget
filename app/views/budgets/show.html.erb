@@ -1,0 +1,19 @@
+<h1><%= @budget.name %> Budget Details:</h1>
+<p> Date: <%= @budget.start_date.strftime('%a, %b %d, %Y') %> until <%= @budget.end_date.strftime('%a, %b %d, %Y') %></p>
+
+<p> Income: $<%= @budget.income %> </p>
+<p> Expenses: $<%= @budget.expenses %> </p>
+<p> Excess Income: $<%= (@budget.income) - (@budget.expenses) %></p>
+<br>
+<br>
+<h2>Transactions:</h2> 
+<ul>
+<% current_user.transactions.each do |transaction| %>
+    <li> $<%= link_to transaction.amount, user_transaction_path(current_user, transaction) %>  spent at <%= transaction.store_name %> on <%= transaction.date.strftime('%a, %b %d, %Y') %></li>
+  <% end %>
+</ul>
+<br>
+<br>
+
+<%= link_to "Edit Budget", edit_user_budget_path(current_user), method:'get'  %> | 
+<%= link_to "Delete Budget", @budget, method: :delete, data: { confirm: "Are you sure?", disable_with: "Processing..." } %> 

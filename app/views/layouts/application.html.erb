@@ -12,8 +12,8 @@
   <body>
     <div>
       <% if logged_in? %>
-      <%= link_to "Create a Budget", new_budget_path, method:'get' %> |
-      <%= link_to "All Budgets", budgets_path, method:'get'  %> |
+      <%= link_to "Create a Budget", new_user_budget_path(current_user), method:'get' %> |
+      <%= link_to "All Budgets", user_budgets_path(current_user), method:'get'  %> |
       <%= link_to "Add a new Transaction", new_user_transaction_path(current_user), method:'get' %> |
       <%= link_to "All Transactions", user_transactions_path(current_user), method:'get' %> |
       <%= link_to "Logout", logout_path, method:'delete' %> |    
