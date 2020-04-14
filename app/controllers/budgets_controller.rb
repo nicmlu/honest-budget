@@ -1,5 +1,6 @@
 class BudgetsController < ApplicationController
     before_action :redirect_if_not_logged_in
+    helper_method :remaining_money, :excess_income
 
     def index 
         @budgets = current_user.budgets
@@ -44,6 +45,14 @@ class BudgetsController < ApplicationController
     
     def budget_params
         params.require(:budget).permit(:name, :income, :expenses, :start_date, :end_date, :content, :notes)
+    end 
+
+    def excess_income
+        @budget.income - @budget.expenses
+    end 
+
+    def remaining_money
+        excess_income - total_spent
     end 
 
 end

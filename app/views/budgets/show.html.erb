@@ -1,9 +1,13 @@
 <h1><%= @budget.name %> Budget Details:</h1>
 <p> Date: <%= @budget.start_date.strftime('%a, %b %d, %Y') %> until <%= @budget.end_date.strftime('%a, %b %d, %Y') %></p>
 
-<p> Income: $<%= @budget.income %> </p>
+<p> Income: $<%= @budget.income%> </p>
 <p> Expenses: $<%= @budget.expenses %> </p>
-<p> Excess Income: $<%= (@budget.income) - (@budget.expenses) %></p>
+<p> Excess Income: $<%= excess_income %></p>
+<br>
+<h2>Notes:</h2> 
+<p> <%= @budget.content %></p> 
+<p> <%= @budget.notes %> </p> 
 <br>
 <br>
 <h2>Transactions:</h2> 
@@ -13,6 +17,8 @@
   <% end %>
 </ul>
 <br>
+<h2>Total Spent: $<%= total_spent %> </h3>
+<h2>Remaining Money: $<%= remaining_money %> </h3>
 <br>
 
 <%= link_to "Edit Budget", edit_user_budget_path(current_user), method:'get'  %> | 

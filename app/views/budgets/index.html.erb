@@ -1,0 +1,7 @@
+<h1> <%= current_user.name%>'s Honest Budgets </h1>
+
+<% @budgets.each do |budget|%>
+<ul>
+<li> <%= link_to budget.name, user_budget_path(current_user, budget) %></li>
+</ul>
+<% end %>
