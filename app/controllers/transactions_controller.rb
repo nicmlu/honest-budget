@@ -7,7 +7,14 @@ class TransactionsController < ApplicationController
     end 
 
     def new
-        @transaction = Transaction.new(user_id: params[:user_id]) 
+        # binding.pry
+        if params[:budget_id] && @budget = Budget.find_by_id(params[:id])
+          @transaction = @budget.transactions.build
+          render :new 
+        else 
+          @transaction = Transaction.new
+          render :new 
+        end  
     end 
 
     def create

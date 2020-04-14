@@ -1,5 +1,9 @@
 <h1>Transaction</h1>
 <%= form_for(@transaction) do |f|%>
+<%= f.label :budget_id %>
+<%= f.collection_select :budget_id, Budget.all, :id, :name %>
+<br>
+<br>
 <%= f.label :store_name %>
 <%= f.text_field :store_name %>
 <br>

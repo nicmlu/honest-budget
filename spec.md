@@ -33,3 +33,4 @@ Help Needed:
 - create budget helper methods? to determine when a user has overspent on their budget and/or a particular category. 
 - research how to use number_to_currency helper method to properly display values. (can't use with a float type input)
 - should calculation methods such as total_spent in transaction controller be moved to the transaction helper file?
+- How do I use the  {:selected => current_book.authors} collection_select feature to have the budget auto populated?
