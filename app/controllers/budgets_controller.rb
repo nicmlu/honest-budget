@@ -11,7 +11,6 @@ class BudgetsController < ApplicationController
     end 
 
     def create
-        binding.pry
         @budget = current_user.budgets.build(budget_params)
         if @budget.save
            redirect_to budget_path(@budget)

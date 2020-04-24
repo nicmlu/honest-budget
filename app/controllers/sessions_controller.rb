@@ -1,47 +1,49 @@
 class SessionsController < ApplicationController
     def home
-      if is_logged_in? 
-        redirect_to user_path(current_user)
-      else
-        render :home
-      end
-      
-    end 
-
-    def new
-    end 
-   
-   def create 
-    if auth
-      @user = User.find_or_create_by(email: auth['info']['email'])
-        @user.first_name = auth["info"]["first_name"]
-        @user.last_name = auth["info"]["last_name"]
-        @user.password = SecureRandom.hex 
-            if @user.save
-            session[:user_id] = @user.id
-            redirect_to user_path(@user)
-            else
-                redirect_to root_path
-            end
+    if is_logged_in? 
+      redirect_to user_path(current_user)
     else
-            @user = User.find_by(email: params[:email])
-            if @user && @user.authenticate(params[:email])
-                session[:user_id] = @user.id
-                redirect_to user_path(@user)           
-            else
-                redirect_to login_path, notice: "Please enter correct login information."
-            end
+      render :home
     end
+  end 
 
-    def destroy
-        session.clear 
-        redirect_to root_path
-    end 
+  def new
+    @user = User.new
+  end 
+   
+  def create 
+    if user_params[:email]
+      @user = User.find_by(email: user_params[:email])
+      if @user && @user.authenticate(user_params[:password])
+        log_in(@user)
+      else 
+        flash[:alert] = "Please enter correct login information."
+        redirect_to login_path
+      end 
+    else 
+      if @user = User.find_by(email: auth[:info][:email])
+        log_in(@user)
+      else 
+        @user = User.new(name: auth[:info][:name], email: auth[:info][:email], password: SecureRandom.hex)
+        if @user.save
+          log_in(@user)
+        else 
+          flash[:alert] = "Please enter correct login information."
+          redirect_to login_path
+        end 
+      end 
+    end
+  end 
 
-    private
 
+  def destroy
+    session.clear 
+    redirect_to root_path
+  end 
+
+  private
+  
     def auth
-    request.env['omniauth.auth']
+      request.env['omniauth.auth']
     end
-end 
-end     
+end    

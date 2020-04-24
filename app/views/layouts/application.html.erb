@@ -17,18 +17,24 @@
      <nav class="grey lighten-1">
       <ul class = "right">
       <% if is_logged_in? %>
-      <%= link_to "Create a Budget", new_user_budget_path(current_user), method:'get' %>
-      <%= link_to "All Budgets", user_budgets_path(current_user), method:'get'  %>
-      <%= link_to "Add a new Transaction", new_user_transaction_path(current_user), method:'get' %>
-      <%= link_to "All Transactions", user_transactions_path(current_user), method:'get' %>
-      <%= link_to "Logout", logout_path, method:'delete' %>
+      <li><%= link_to "Create a Budget", new_user_budget_path(current_user), method:'get' %></li> 
+      <li><%= link_to "All Budgets", user_budgets_path(current_user), method:'get'  %></li> 
+      <li><%= link_to "Add a new Transaction", new_user_transaction_path(current_user), method:'get' %></li> 
+      <li><%= link_to "All Transactions", user_transactions_path(current_user), method:'get' %></li> 
+      <li><%= link_to "Logout", logout_path, method:'delete' %></li> 
       <% else %>
-      <%= link_to "Sign Up", signup_path, method:'get' %>
-      <%= link_to "Log In", login_path, method:'get' %>
+      <li><%= link_to "Sign Up", signup_path, method:'get' %></li> 
+      <li><%= link_to "Log In", login_path, method:'get' %></li> 
       <% end %>
       </ul>
       </nav>
     </div>
+
+      <% flash.each do |type, msg| %>
+      <div>
+        <%= msg %>
+      </div>
+        <% end %>
 
 
     <div class="container center">

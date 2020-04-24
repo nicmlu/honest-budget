@@ -34,3 +34,31 @@ Help Needed:
 - research how to use number_to_currency helper method to properly display values. (can't use with a float type input)
 - should calculation methods such as total_spent in transaction controller be moved to the transaction helper file?
 - How do I use the  {:selected => current_book.authors} collection_select feature to have the budget auto populated?
+
+
+Google Button Code: 
+in head : <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+
+<br>
+<div id="my-signin2" class="center"></div>
+  <script>
+    function onSuccess(googleUser) {
+      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+    }
+    function onFailure(error) {
+      console.log(error);
+    }
+    function renderButton() {
+      gapi.signin2.render('my-signin2', {
+        'scope': 'profile email',
+        'width': 200,
+        'height': 50,
+        'longtitle': true,
+        'theme': 'dark',
+        'onsuccess': onSuccess,
+        'onfailure': onFailure,
+        'align': 'center',
+      });
+    }
+  </script>
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
