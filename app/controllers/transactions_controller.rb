@@ -1,13 +1,12 @@
 class TransactionsController < ApplicationController
     before_action :redirect_if_not_logged_in
+    before_action :find_transaction, only: [:show, :edit, :update]
 
     def index 
         @transactions = current_user.transactions
-        # binding.pry
     end 
 
     def new
-        # binding.pry
         if params[:budget_id] && @budget = Budget.find_by_id(params[:id])
           @transaction = @budget.transactions.build
           render :new 
@@ -29,16 +28,12 @@ class TransactionsController < ApplicationController
     end 
 
     def show 
-        @transaction = Transaction.find(params[:id])
     end 
 
     def edit
-        # binding.pry
-        @transaction = Transaction.find(params[:id])
     end 
 
     def update 
-        @transaction = Transaction.find(params[:id])
         @transaction.update(transaction_params)
         redirect_to user_transaction_path(current_user)
     end 
@@ -55,6 +50,8 @@ class TransactionsController < ApplicationController
         params.require(:transaction).permit(:store_name, :amount, :date)
     end 
 
-
+    def find_transaction
+        @transaction = Transaction.find(params[:id])
+    end 
 
 end
