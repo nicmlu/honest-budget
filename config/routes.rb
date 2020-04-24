@@ -10,11 +10,14 @@ root 'sessions#home'
   delete '/logout' => 'sessions#destroy'
 
   # resources :transaction_categories
-  resources :budgets do
-    resources :transactions, only: [:new, :show]
-  end 
   resources :categories
   resources :transactions
+
+  resources :budgets do
+    resources :transactions, only: [:new, :show]
+    resources :categories, only: [:new, :show]
+  end 
+
   resources :users do
     resources :transactions, only: [:show, :index, :new, :create, :edit, :update]
     resources :budgets, only: [:show, :index, :new, :create, :edit, :update]

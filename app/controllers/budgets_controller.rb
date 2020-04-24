@@ -11,6 +11,7 @@ class BudgetsController < ApplicationController
     end 
 
     def create
+        binding.pry
         @budget = current_user.budgets.build(budget_params)
         if @budget.save
            redirect_to budget_path(@budget)
@@ -44,7 +45,7 @@ class BudgetsController < ApplicationController
     private
     
     def budget_params
-        params.require(:budget).permit(:name, :income, :expenses, :start_date, :end_date, :content, :notes)
+        params.require(:budget).permit(:name, :income, :expenses, :start_date, :end_date, :content, :notes, category_ids:[], categories_attributes: [:name])
     end 
 
     def excess_income

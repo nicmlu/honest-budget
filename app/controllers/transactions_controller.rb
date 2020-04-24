@@ -52,7 +52,7 @@ class TransactionsController < ApplicationController
     private
     
     def transaction_params
-        params.require(:transaction).permit(:store_name, :amount, :date, category_ids:[], categories_attributes: [:name])
+        params.require(:transaction).permit(:store_name, :amount, :date)
     end 
 
 

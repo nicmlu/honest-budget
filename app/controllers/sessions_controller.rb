@@ -1,25 +1,48 @@
 class SessionsController < ApplicationController
+def home
+      if is_logged_in? 
+        redirect_to user_path(current_user)
+      else
+        render :home
+      end
+      
+    end 
+
+    def new
+    end 
+   
+   def create 
+    if auth
+      @user = User.find_or_create_by(email: auth['info']['email'])
+        @user.first_name = auth["info"]["first_name"]
+        @user.last_name = auth["info"]["last_name"]
+        @user.password = SecureRandom.hex 
+          if @user.save
+            session[:user_id] = @user.id
+            redirect_to user_path(@user)
+            else
+                redirect_to root_path
+            end
+          else
+            @user = User.find_by(email: params[:email])
+            if @user && @user.authenticate(params[:email])
+                session[:user_id] = @user.id
+                redirect_to user_path(@user)           
+            else
+                redirect_to login_path, notice: "Please enter correct login information."
+            end
+          end
+
     def destroy
         session.clear 
         redirect_to root_path
     end 
 
-    def create
-      user = User.find_by(email: user_params[:email])
-      if user && user.authenticate(user_params[:password])
-          session[:user_id] = user.id
-          redirect_to user_path(user)
-      else 
-          flash[:message] = "Incorrect login information. Please try again."
-          redirect_to login_path
-      end 
-    end 
-
-
     private
-    
-    def user_params
-        params.require(:user).permit(:email, :password)
+
+    def auth
+    request.env['omniauth.auth']
     end
+
 
 end 

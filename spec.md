@@ -29,7 +29,7 @@ To Do:
 
 Help Needed: 
 - Nested routes not working for transactions, wont allow me to edit because route is not available for class if I route it. 
-- If I use collection_select, where do the category names populate from? (transaction category names are budget categories) How can I get the transaction categories to populate from budget categories? Do I have to add them as budget attributes and then build/shovel into categories 
+- If I use collection_select, where do the category names populate from? (transaction category names are budget categories) How can I get the transaction categories to populate from budget categories? Do I have to add them as budget attributes and then build/shovel into categories? 
 - create budget helper methods? to determine when a user has overspent on their budget and/or a particular category. 
 - research how to use number_to_currency helper method to properly display values. (can't use with a float type input)
 - should calculation methods such as total_spent in transaction controller be moved to the transaction helper file?
