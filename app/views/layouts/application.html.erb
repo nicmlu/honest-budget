@@ -7,21 +7,40 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   </head>
 
   <body>
-    <div>
+    <div class="navbar-fixed">
+     <nav class="grey lighten-1">
+      <ul class = "right">
       <% if is_logged_in? %>
-      <%= link_to "Create a Budget", new_user_budget_path(current_user), method:'get' %> |
-      <%= link_to "All Budgets", user_budgets_path(current_user), method:'get'  %> |
-      <%= link_to "Add a new Transaction", new_user_transaction_path(current_user), method:'get' %> |
-      <%= link_to "All Transactions", user_transactions_path(current_user), method:'get' %> |
-      <%= link_to "Logout", logout_path, method:'delete' %> |    
+      <%= link_to "Create a Budget", new_user_budget_path(current_user), method:'get' %>
+      <%= link_to "All Budgets", user_budgets_path(current_user), method:'get'  %>
+      <%= link_to "Add a new Transaction", new_user_transaction_path(current_user), method:'get' %>
+      <%= link_to "All Transactions", user_transactions_path(current_user), method:'get' %>
+      <%= link_to "Logout", logout_path, method:'delete' %>
       <% else %>
-      <%= link_to "Sign Up", signup_path, method:'get' %> |
+      <%= link_to "Sign Up", signup_path, method:'get' %>
       <%= link_to "Log In", login_path, method:'get' %>
       <% end %>
-      </div>
-    <%= yield %>
+      </ul>
+      </nav>
+    </div>
+
+
+    <div class="container center">
+
+      <%= yield %>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
   </body>
 </html>
