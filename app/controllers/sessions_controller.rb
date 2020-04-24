@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-def home
+    def home
       if is_logged_in? 
         redirect_to user_path(current_user)
       else
@@ -17,13 +17,13 @@ def home
         @user.first_name = auth["info"]["first_name"]
         @user.last_name = auth["info"]["last_name"]
         @user.password = SecureRandom.hex 
-          if @user.save
+            if @user.save
             session[:user_id] = @user.id
             redirect_to user_path(@user)
             else
                 redirect_to root_path
             end
-          else
+    else
             @user = User.find_by(email: params[:email])
             if @user && @user.authenticate(params[:email])
                 session[:user_id] = @user.id
@@ -31,7 +31,7 @@ def home
             else
                 redirect_to login_path, notice: "Please enter correct login information."
             end
-          end
+    end
 
     def destroy
         session.clear 
@@ -43,6 +43,5 @@ def home
     def auth
     request.env['omniauth.auth']
     end
-
-
 end 
+end     

@@ -11,7 +11,7 @@
 
   <body>
     <div>
-      <% if logged_in? %>
+      <% if is_logged_in? %>
       <%= link_to "Create a Budget", new_user_budget_path(current_user), method:'get' %> |
       <%= link_to "All Budgets", user_budgets_path(current_user), method:'get'  %> |
       <%= link_to "Add a new Transaction", new_user_transaction_path(current_user), method:'get' %> |
