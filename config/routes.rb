@@ -6,6 +6,8 @@ root 'sessions#home'
  
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
+  get '/auth/facebook/callback' => 'sessions#create'
+  get '/auth/google_oauth2/callback' => 'sessions#create'
 
   delete '/logout' => 'sessions#destroy'
 
