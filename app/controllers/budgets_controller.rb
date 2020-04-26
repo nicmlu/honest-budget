@@ -1,5 +1,6 @@
 class BudgetsController < ApplicationController
     before_action :redirect_if_not_logged_in
+    before_action :find_budget, only: [:show, :edit, :update]
     helper_method :remaining_money, :excess_income
 
     def index 
@@ -15,22 +16,19 @@ class BudgetsController < ApplicationController
         if @budget.save
            redirect_to budget_path(@budget)
         else 
-          flash[:message] = "Budget did not save. Please try again."
+          flash[:alert] = "Budget did not save. Please try again."
           render :new 
         end
 
     end 
 
     def show 
-        @budget = Budget.find(params[:id])
     end 
 
     def edit
-        @budget = Budget.find(params[:id])
     end 
 
-    def update 
-        @budget = Budget.find(params[:id])
+    def update
         @budget.update(budget_params)
         redirect_to user_budget_path(current_user)
     end 
@@ -53,6 +51,10 @@ class BudgetsController < ApplicationController
 
     def remaining_money
         excess_income - total_spent
+    end 
+    
+    def find_budget
+        @budget = Budget.find(params[:id])
     end 
 
 end
