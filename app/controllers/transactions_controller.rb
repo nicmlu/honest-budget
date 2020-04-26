@@ -7,8 +7,10 @@ class TransactionsController < ApplicationController
     end 
 
     def new
-        if params[:budget_id] && @budget = Budget.find_by_id(params[:id])
-          @transaction = @budget.transactions.build
+        if params[:budget_id]
+          @budget = Budget.find_by_id(params[:budget_id])
+          @transaction = Transaction.new
+          @transaction.budget_id = @budget.id
           render :new 
         else 
           @transaction = Transaction.new
@@ -47,7 +49,7 @@ class TransactionsController < ApplicationController
     private
     
     def transaction_params
-        params.require(:transaction).permit(:store_name, :amount, :date)
+        params.require(:transaction).permit(:store_name, :amount, :date, categories_attributes: [:name])
     end 
 
     def find_transaction

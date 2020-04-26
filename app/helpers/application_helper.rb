@@ -21,7 +21,7 @@ module ApplicationHelper
   end 
 
   def user_params
-    aparams.require(:user).permit(:name, :email, :password)
+    params.require(:user).permit(:name, :email, :password)
   end 
 
 end

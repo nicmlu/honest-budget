@@ -20,20 +20,8 @@
 <%= f.date_field :end_date %>
 <br>
 <br>
-<%= f.label :content %>
-<%= f.text_field :content %>
-<br>
-<br>
 <%= f.label :notes %>
 <%= f.text_field :notes %>
-<br>
-<br>
-<%= f.fields_for :categories, new_category_path do |categories_fields| %>
-<div class="field">
-     <%= categories_fields.label :category %>
-     <%= categories_fields.text_field :name%>
-</div>
-<% end %>
 <br>
 <br>
 <%= f.submit%>

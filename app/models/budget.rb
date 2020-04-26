@@ -1,5 +1,5 @@
 class Budget < ApplicationRecord
-  belongs_to :user
-  has_many :categories 
-  accepts_nested_attributes_for :categories 
+  belongs_to :user 
+  has_many :transactions, foreign_key: "transaction_id", class_name: "Transaction"
+  validates :name, uniqueness: true
 end
