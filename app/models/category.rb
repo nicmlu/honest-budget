@@ -1,4 +1,4 @@
 class Category < ApplicationRecord
-  has_many :transaction_categories
-  has_many :transactions, through: :transaction_categories
+  has_many :transactions
+  has_many :budgets, through: :transactions
 end

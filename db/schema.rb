@@ -10,45 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_25_232221) do
-
-  create_table "budgets", force: :cascade do |t|
-    t.string "name"
-    t.float "income"
-    t.float "expenses"
-    t.datetime "start_date"
-    t.datetime "end_date"
-    t.text "notes"
-    t.integer "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_budgets_on_user_id"
-  end
-
-  create_table "categories", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "transaction_categories", force: :cascade do |t|
-    t.integer "transaction_id"
-    t.integer "category_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "transactions", force: :cascade do |t|
-    t.string "store_name"
-    t.float "amount"
-    t.datetime "date"
-    t.integer "user_id", null: false
-    t.integer "budget_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["budget_id"], name: "index_transactions_on_budget_id"
-    t.index ["user_id"], name: "index_transactions_on_user_id"
-  end
+ActiveRecord::Schema.define(version: 2020_04_11_045846) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -58,7 +20,4 @@ ActiveRecord::Schema.define(version: 2020_04_25_232221) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "budgets", "users"
-  add_foreign_key "transactions", "budgets"
-  add_foreign_key "transactions", "users"
 end

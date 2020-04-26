@@ -1,5 +1,6 @@
 class Budget < ApplicationRecord
   belongs_to :user 
-  has_many :transactions, foreign_key: "transaction_id", class_name: "Transaction"
+  has_many :transactions
+  has many :categories, through: :transactions
   validates :name, uniqueness: true
 end
