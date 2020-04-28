@@ -1,9 +1,46 @@
-<h1> All Transactions </h1>
+<h1> <%= current_user.name%>'s Transactions </h1>
 
-<% @transactions.each do |transaction|%>
-<ul>
-<li> $<%= link_to transaction.amount, user_transaction_path(current_user, transaction) %>  spent at <%= transaction.store_name %> on <%= transaction.date.strftime('%a, %b %d, %Y') %></li>
-</ul>
-<% end %>
+<% if @transactions == [] %>
+<br>
+<br>
+
+  <div class="row">
+    <div class="col s12 m12">
+      <div class="card grey darken-4">
+        <div class="card-content white-text">
+          <span class="card-title">You have no transactions stored.</span>
+        </div>
+        <div class="card-action">
+          <%= link_to "Add a New Transaction", new_transaction_path, method:'get'  %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<% else %>
+
+<table class="striped highlight center">
+  <thead>
+    <th>Store Name</th>
+    <th>Amount</th>
+    <th>Date</th>
+    <th>Category</th>
+  </thead>
+
+  <tbody>
+    <% @transactions.each do |transaction|%>
+        <tr>
+            <td> <%= transaction.store_name %></td>
+            <td> $<%= link_to transaction.amount, user_transaction_path(current_user, transaction) %>  spent at <%= transaction.store_name %> on <%= transaction.date.strftime('%a, %b %d, %Y') %></td>
+            <td> <%= transaction.date.strftime('%a, %b %d, %Y') %></td>
+            <td> <%= transaction.category %></td>
+        </tr>
+    <% end %>
+
+    </tbody>
+</table>
 
 <h2>Total Spent: $<%= total_spent %> </h2>
+
+<% end %>

@@ -1,7 +1,21 @@
 <h1> <%= current_user.name%>'s Honest Budgets </h1>
 
-<% @budgets.each do |budget|%>
-<ul>
-<li> <%= link_to budget.name, user_budget_path(current_user, budget) %></li>
-</ul>
-<% end %>
+<table class="striped highlight center">
+  <thead>
+    <th>Name</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+  </thead>
+
+  <tbody>
+
+    <% @budgets.each do |budget|%>
+        <tr>
+            <td> <%= link_to budget.name, user_budget_path(current_user, budget) %></td>
+            <td>  <%= budget.start_date.strftime('%a %b %d, %Y') %> </td>
+            <td>  <%= budget.end_date.strftime('%a %b %d, %Y') %> </td>
+        </tr>
+    <% end %>
+
+  </tbody>
+</table>
