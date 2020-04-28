@@ -1,7 +1,18 @@
-<h1>Transaction Details:</h1>
-<p> Store Name: <%= @transaction.store_name %></p>
-<p> Date: <%= @transaction.date.strftime('%a, %b %d, %Y') %> </p>
-<p> Amount: <%= @transaction.amount %> </p>
+<div class="row">
+    <div class="col s12 m12">
+      <div class="card grey darken-4">
+        <div class="card-content white-text">
+          <span class="card-title"><%= @transaction.store_name %>.</span>
+            <p> Date: <%= @transaction.date.strftime('%a, %b %d, %Y') %> </p>
+            <p> Amount: <%= @transaction.amount %> </p>
+        </div>
+        <div class="card-action">
+          <%= link_to "Edit Transaction", edit_user_transaction_path, method:'get'  %> 
+          <%= link_to "Delete Transaction", @transaction, method: :delete, data: { confirm: "Are you sure?", disable_with: "Processing..." } %> 
+        </div>
+      </div>
+    </div>
+</div>
 
-<%= link_to "Edit Transaction", edit_user_transaction_path, method:'get'  %> | 
-<%= link_to "Delete Transaction", @transaction, method: :delete, data: { confirm: "Are you sure?", disable_with: "Processing..." } %> 
+
+

@@ -22,21 +22,23 @@
     
     <nav class="nav-extended">
      <div class="nav-wrapper grey">
-     <ul class="left">
+
+      
+      <% if is_logged_in? %>
+      <ul class="left">
        <a href="/" class="brand-logo">
-      <img src="/logo.png" alt="Honest Budget Logo"style="width:100px;height:100px;border:0;">
+      <img src="/logo.png" alt="Honest Budget Logo"style="width:68px;height:68px;border:0;">
       </a>
       </ul>
 
       <ul class="right">
-      <% if is_logged_in? %>
-      <li class="btn-small grey darken-4"><%= link_to "Create a New Budget", new_user_budget_path(current_user), method:'get' %></li>
-      <li class="btn-small grey darken-4"><%= link_to "All Budgets", user_budgets_path(current_user), method:'get'  %></li> 
-      <li class="btn-small grey darken-4"><%= link_to "All Transactions", user_transactions_path(current_user), method:'get' %></li> 
-      <li class="btn-small grey darken-4"><%= link_to "Logout", logout_path, method:'delete' %></li> 
+      <li class="text grey darken-4"><%= link_to "Create a New Budget", new_user_budget_path(current_user), method:'get' %></li>
+      <li class="text grey darken-4"><%= link_to "All Budgets", user_budgets_path(current_user), method:'get'  %></li> 
+      <li class="text grey darken-4"><%= link_to "All Transactions", user_transactions_path(current_user), method:'get' %></li> 
+      <li class="text grey darken-4"><%= link_to "Logout", logout_path, method:'delete' %></li> 
       <% else %>
-      <li class="btn-small grey darken-4"><%= link_to "Sign Up", signup_path, method:'get' %></li> 
-      <li class="btn-small grey darken-4"><%= link_to "Log In", login_path, method:'get' %></li> 
+      <li class="text grey darken-4"><%= link_to "Sign Up", signup_path, method:'get' %></li> 
+      <li class="text grey darken-4"><%= link_to "Log In", login_path, method:'get' %></li> 
       <% end %>
       </ul>
       
@@ -63,7 +65,9 @@
   <br>
   <br>
 
-  <footer class="page-footer grey">
+  <footer class="page-footer center grey">
+    <div class="text grey darken-4">
         © 2020 Honest Budget
+    <div>
   </footer>
 </html>

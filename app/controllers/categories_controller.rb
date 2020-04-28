@@ -5,6 +5,7 @@ class CategoriesController < ApplicationController
     end
 
     def new
+      @category.new
     end 
 
     def show

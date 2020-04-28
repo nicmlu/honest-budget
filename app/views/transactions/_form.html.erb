@@ -1,29 +1,20 @@
-<h1>Transaction</h1>
+<% @transaction.id ? "New Transaction" : "Edit Transaction" %>
+
 <%= form_for(@transaction) do |f|%> 
-<%= f.hidden_field :user_id, :value => current_user.id %>
-
-<%= f.label "Budget:" %>
-<%= f.collection_select :budget_id, current_user.budgets, :id, :name, prompt: true %><br/>
-<br>
 <%= f.label :store_name %>
-<%= f.text_field :store_name %>
-
+<%= f.text_field :store_name %><br>
 <br>
-<br>
-
 <%= f.label :date %>
-<%= f.date_field :date %>
-
+<%= f.date_field :date %><br>
 <br>
-<br>
-
 <%= f.label :amount %>
-<%= f.number_field :amount %>
-
+<%= f.number_field :amount %><br>
 <br>
+<%= f.label "Budget:" %>
+<%= f.select :budget_id, current_user.budgets, :id, :name %><br>
 <br>
   <%= f.label "Pick an Existing Category:" %>
-    <%= f.collection_select :category_id, Category.all, :id, :name, prompt: true %><br /><br />
+    <%= f.collection_select :category_id, Category.all, :id, :name, prompt: true %><br/>
     <%= "Add a New Category: " %><br/>
     <%= f.fields_for :category do |category_attributes| %>
         <%= category_attributes.text_field :name %><br />

@@ -7,11 +7,11 @@ class TransactionsController < ApplicationController
     end 
 
     def new
-        if params[:budget_id]
-          @transaction = Transaction.new(budget_id: params[:budget_id])
+        if params[:budget_id]  == nil 
+          @transaction = Transaction.new
           render :new 
         else 
-          flash[:alert] = "You can only add a new transaction to an existing budget. Create a new budget if this transaction is not tied to an existing budget."
+          @transaction = Transaction.new(budget_id: params[:budget_id])
           render :new 
         end  
     end 
