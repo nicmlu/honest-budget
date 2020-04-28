@@ -18,6 +18,9 @@ class UsersController < ApplicationController
         @user = current_user
         redirect_to '/' if !@user
     end 
+
+    def destroy
+    end
     
 
 

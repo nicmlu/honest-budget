@@ -10,16 +10,22 @@
 
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
   </head>
 
+<main>
   <body>
-    <div class="navbar-fixed">
-     <nav class="grey lighten-1">
-      <ul class = "right">
+    
+    
+    <nav>
+     <div class="nav-wrapper grey">
+      <ul class="right">
       <% if is_logged_in? %>
-      <li><%= link_to "Create a Budget", new_user_budget_path(current_user), method:'get' %></li> 
+      <li><%= link_to "Create a New Budget", new_user_budget_path(current_user), method:'get' %></li> 
       <li><%= link_to "All Budgets", user_budgets_path(current_user), method:'get'  %></li> 
-      <li><%= link_to "Add a new Transaction", new_user_transaction_path(current_user), method:'get' %></li> 
       <li><%= link_to "All Transactions", user_transactions_path(current_user), method:'get' %></li> 
       <li><%= link_to "Logout", logout_path, method:'delete' %></li> 
       <% else %>
@@ -27,14 +33,12 @@
       <li><%= link_to "Log In", login_path, method:'get' %></li> 
       <% end %>
       </ul>
-      </nav>
-    </div>
+     </div>
+    </nav>
 
     <%if flash[:alert]  %>
-        <div class="container red lighten-4">
-            <div class="row">
+        <div class="alert alert-danger" role="alert">
      <%=  flash[:alert] %> 
-            </div>
         </div>
     <% end %>
 
@@ -45,10 +49,14 @@
 
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
   </body>
+  </main>
+  <br>
+  <br>
+
+  <footer class="page-footer grey">
+        © 2020 Honest Budget
+  </footer>
 </html>

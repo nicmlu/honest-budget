@@ -1,45 +1,33 @@
-<div class="input-field col s12">
 <h1>Transaction</h1>
-<%= form_for(@transaction) do |f|%>
- <%= f.hidden_field :user_id, value: current_user %>
- 
-<%= f.label "Budget Name:" %>
-    <%= f.text_field :budget_id, list: "budget_autocomplete" %>
-        <datalist id= "budget_autocomplete"> 
-            <%current_user.budgets.each do |budget|%>
-                <option value= "<%= budget.name %> ">
-            <%end%>
-        </datalist>
-<br>
+<%= form_for(@transaction) do |f|%> 
+<%= f.hidden_field :user_id, :value => current_user.id %>
+
+<%= f.label "Budget:" %>
+<%= f.collection_select :budget_id, current_user.budgets, :id, :name, prompt: true %><br/>
 <br>
 <%= f.label :store_name %>
 <%= f.text_field :store_name %>
+
 <br>
 <br>
+
 <%= f.label :date %>
 <%= f.date_field :date %>
+
 <br>
 <br>
+
 <%= f.label :amount %>
 <%= f.number_field :amount %>
+
 <br>
 <br>
-  <%= f.label "Choose an existing category:" %>
-      <%= f.text_field :category_ids, list: "category_autocomplete" %>
-        <datalist id= "category_autocomplete"> 
-            <%@transaction.categories.each do |category|%>
-                <option value= "<%= category.name %> ">
-            <%end%>
-        </datalist>
-<br>
-   <%= f.label "or create a new category" %>
-   <%= f.fields_for :categories, @transaction.categories.build do |categories_fields| %>
-   <%= categories_fields.label :name %>
-   <%= categories_fields.text_field :name %>
+  <%= f.label "Pick an Existing Category:" %>
+    <%= f.collection_select :category_id, Category.all, :id, :name, prompt: true %><br /><br />
+    <%= "Add a New Category: " %><br/>
+    <%= f.fields_for :category do |category_attributes| %>
+        <%= category_attributes.text_field :name %><br />
   <% end %>
-  </p>
-<br>
 <br>
 <%= f.submit%>
 <% end %>
-</div>

@@ -8,22 +8,23 @@ class TransactionsController < ApplicationController
 
     def new
         if params[:budget_id]
-          @budget = Budget.find_by_id(params[:budget_id])
-          @transaction = Transaction.new
-          @transaction.budget_id = @budget.id
+          @transaction = Transaction.new(budget_id: params[:budget_id])
           render :new 
         else 
-          @transaction = Transaction.new
+          flash[:alert] = "You can only add a new transaction to an existing budget. Create a new budget if this transaction is not tied to an existing budget."
           render :new 
         end  
     end 
 
-    def create
+    def create  
         @transaction = current_user.transactions.build(transaction_params)
+        binding.pry
+        @category = Category.find_or_create_by(name: transaction_params[:category_attributes][:name])
+        @category.transactions << @transaction
         if @transaction.save
-           redirect_to transaction_path(@transaction)
+           show_transaction
         else 
-          flash[:message] = "Transaction did not save. Please try again."
+          flash[:alert] = "Transaction did not save. Please try again."
           render :new 
         end
 
@@ -36,8 +37,12 @@ class TransactionsController < ApplicationController
     end 
 
     def update 
-        @transaction.update(transaction_params)
-        redirect_to user_transaction_path(current_user)
+        if @transaction.update(transaction_params)
+        show_transaction
+        else 
+          flash[:alert] = "Transaction did not update. Please try again."
+          render :edit
+        end 
     end 
 
     def destroy 
@@ -49,11 +54,15 @@ class TransactionsController < ApplicationController
     private
     
     def transaction_params
-        params.require(:transaction).permit(:store_name, :amount, :date, categories_attributes: [:name])
+        params.require(:transaction).permit(:store_name, :amount, :date, :user_id, :budget_id, :category_id, category_attributes: [:name])
     end 
 
     def find_transaction
         @transaction = Transaction.find(params[:id])
+    end 
+
+    def show_transaction
+        redirect_to transaction_path(@transaction)
     end 
 
 end
