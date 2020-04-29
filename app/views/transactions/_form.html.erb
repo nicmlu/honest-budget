@@ -1,4 +1,6 @@
-<% @transaction.id ? "New Transaction" : "Edit Transaction" %>
+<div class="grey-text">
+<%= "Transaction Form" %>
+</div>
 
 <%= form_for(@transaction) do |f|%> 
 <%= f.label :store_name %>
