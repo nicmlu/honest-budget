@@ -23,7 +23,7 @@ class TransactionsController < ApplicationController
         @category.transactions << @transaction
         if @transaction.save
            show_transaction
-        else 
+        else
           flash[:alert] = "Transaction did not save. Please try again."
           render :new 
         end

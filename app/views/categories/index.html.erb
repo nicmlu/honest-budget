@@ -1,4 +1,6 @@
+<div class="lighten-1">
 <h3> <%= current_user.name%>'s Budget Categories </h3>
+</div>
 <br>
 
 <% if @categories == [] %>
@@ -20,11 +22,9 @@
 
 
 <% else %>
-
-  <div class="row">
     
       <div class="card grey lighten-2">
-        <span class="black-text">    
+        <span class="white-text">    
         <% @categories.each do |category|%>
         <ul>
             <li> <%= category.name %></li>
@@ -33,7 +33,13 @@
         </span>
       </div>
     
-  </div>
 
 
 <% end %>
+
+
+<form action="/categories/new" method="get">
+  <label for="fname">Add a New Category:</label><br>
+  <input type="text" name="name"><br>
+  <input type="submit" value="Submit">
+</form>

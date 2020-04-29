@@ -21,24 +21,21 @@
     
     
     <nav class="nav-extended">
-     <div class="nav-wrapper grey">
+     <div class="nav-wrapper grey lighten-1">
 
-      
-      <% if is_logged_in? %>
       <ul class="left">
-       <a href="/" class="brand-logo">
-      <img src="/logo.png" alt="Honest Budget Logo"style="width:68px;height:68px;border:0;">
-      </a>
+        <a href="/" class="brand-logo"> HNST BDGT </a>
       </ul>
 
+      <% if is_logged_in? %>
       <ul class="right">
-      <li class="text grey darken-4"><%= link_to "Create a New Budget", new_user_budget_path(current_user), method:'get' %></li>
-      <li class="text grey darken-4"><%= link_to "All Budgets", user_budgets_path(current_user), method:'get'  %></li> 
-      <li class="text grey darken-4"><%= link_to "All Transactions", user_transactions_path(current_user), method:'get' %></li> 
-      <li class="text grey darken-4"><%= link_to "Logout", logout_path, method:'delete' %></li> 
+      <li><%= link_to "Create a New Budget", new_user_budget_path(current_user), method:'get' %></li>
+      <li><%= link_to "All Budgets", user_budgets_path(current_user), method:'get'  %></li> 
+      <li><%= link_to "All Transactions", user_transactions_path(current_user), method:'get' %></li> 
+      <li><%= link_to "Logout", logout_path, method:'delete' %></li> 
       <% else %>
-      <li class="text grey darken-4"><%= link_to "Sign Up", signup_path, method:'get' %></li> 
-      <li class="text grey darken-4"><%= link_to "Log In", login_path, method:'get' %></li> 
+      <li><%= link_to "Sign Up", signup_path, method:'get' %></li> 
+      <li><%= link_to "Log In", login_path, method:'get' %></li> 
       <% end %>
       </ul>
       
@@ -65,8 +62,8 @@
   <br>
   <br>
 
-  <footer class="page-footer center grey">
-    <div class="text grey darken-4">
+  <footer class="page-footer center grey lighten-1">
+    <div>
         © 2020 Honest Budget
     <div>
   </footer>
