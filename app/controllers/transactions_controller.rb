@@ -18,9 +18,12 @@ class TransactionsController < ApplicationController
 
     def create  
         @transaction = current_user.transactions.build(transaction_params)
-        binding.pry
-        @category = Category.find_or_create_by(name: transaction_params[:category_attributes][:name])
+        
+        
+        @budget = Budget.find_by(name: transaction_params[:budget_id])
+        @category = Category.find_or_create_by(name: transaction_params[:category_id])
         @category.transactions << @transaction
+        binding.pry
         if @transaction.save
            show_transaction
         else
@@ -54,7 +57,7 @@ class TransactionsController < ApplicationController
     private
     
     def transaction_params
-        params.require(:transaction).permit(:store_name, :amount, :date, :user_id, :budget_id, :category_id, category_attributes: [:name])
+        params.require(:transaction).permit(:store_name, :amount, :date, :user_id, :budget_id, :category_id, :budget, :category, category_attributes: [:name])
     end 
 
     def find_transaction

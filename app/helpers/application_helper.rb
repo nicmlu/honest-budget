@@ -24,4 +24,8 @@ module ApplicationHelper
     params.require(:user).permit(:name, :email, :password)
   end 
 
+  def user_budgets
+    current_user.budgets
+  end 
+
 end

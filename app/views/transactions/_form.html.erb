@@ -1,8 +1,12 @@
 <div class="grey-text">
-<%= "Transaction Form" %>
+<h3> Transaction Form </h3>
 </div>
+<br>
 
 <%= form_for(@transaction) do |f|%> 
+
+<%= f.hidden_field :user_id, :value => current_user.id %>
+
 <%= f.label :store_name %>
 <%= f.text_field :store_name %><br>
 <br>
@@ -12,15 +16,23 @@
 <%= f.label :amount %>
 <%= f.number_field :amount %><br>
 <br>
-<%= f.label "Budget:" %>
-<%= f.select :budget_id, current_user.budgets, :id, :name %><br>
+ <%= f.label "Budget" %>
+      <%= f.text_field :budget_id, list: "budget_autocomplete" %>
+        <datalist id= "budget_autocomplete"> 
+            <% user_budgets.each do |budget|%>
+                <option value=" <%= budget.name %> ">
+            <%end%>
+        </datalist>
 <br>
-  <%= f.label "Pick an Existing Category:" %>
-    <%= f.collection_select :category_id, Category.all, :id, :name, prompt: true %><br/>
-    <%= "Add a New Category: " %><br/>
-    <%= f.fields_for :category do |category_attributes| %>
-        <%= category_attributes.text_field :name %><br />
-  <% end %>
+  <%= f.label "Pick an Existing Category or Type in a New Category" %>
+      <%= f.text_field :category_id, list: "category_autocomplete" %>
+        <datalist id= "category_autocomplete"> 
+            <% Category.all.each do |category|%>
+                <option value=" <%= category.name %> ">
+            <%end%>
+        </datalist>
+<br>
 <br>
 <%= f.submit%>
 <% end %>
+

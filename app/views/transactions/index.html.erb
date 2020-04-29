@@ -2,6 +2,10 @@
 <h3> <%= current_user.name%>'s Transactions </h3>
 </div>
 
+<div class="grey-text">
+<h4> Total Spent: $<%= total_spent %> </h4>
+</div>
+
 <% if @transactions == [] %>
 <br>
 <br>
@@ -42,7 +46,5 @@
 
     </tbody>
 </table>
-
-<h4> Total Spent: $<%= total_spent %> </h4>
 
 <% end %>

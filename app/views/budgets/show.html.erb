@@ -1,24 +1,63 @@
-<h1><%= @budget.name %> Budget Details:</h1>
-<p> Date: <%= @budget.start_date.strftime('%a, %b %d, %Y') %> until <%= @budget.end_date.strftime('%a, %b %d, %Y') %></p>
+<br>
+<div class="row">
+    <div class="col s6 m4">
+      <div class="card grey">
+        <div class="card-content white-text">
+          <span class="card-title"><%= @budget.name %> Budget</span>
+          <p> Start Date: <%= @budget.start_date.strftime('%b %d, %Y') %> </p>
+          <p> End Date: <%= @budget.end_date.strftime('%b %d, %Y') %> </p>
+          <br>
+          <p> Income: $<%= @budget.income%> </p>
+          <p> Expenses: $<%= @budget.expenses %> </p>
+          <br>
+          <p> Excess Income: $<%= excess_income %></p>
+          <br>
+          <p> Total Spent: $<%= total_spent %></p>
+          <p> Remaining Income: $<%= remaining_money%></p>
+          <br>
+          <p>Notes: <%= @budget.notes %> </p>
+        </div>
+        <div class="card-action">
+         <p> <%= link_to "Add New Budget Transaction", new_budget_transaction_path(@budget.id), method:'get'  %> </p>
+         <p> <%= link_to "Edit Budget", edit_user_budget_path(current_user), method:'get'  %> </p>
+         <p> <%= link_to "Delete Budget", @budget, method: :delete, data: { confirm: "Are you sure?", disable_with: "Processing..." } %> </p>
+        </div>
+      </div>
+    </div>
+  <% if @transactions == [] %>
+      <div class="col s6 m8">
+        <div class="card grey">
+          <div class="card-content white-text">
+            <span class="card-title">You have no transactions stored.</span>
+          </div>
+          <div class="card-action black-text">
+            <%= link_to "Add New Budget Transaction", new_transaction_path, method:'get'  %>
+          </div>
+        </div>
+      </div>
+        <% else %>
 
-<p> Income: $<%= @budget.income%> </p>
-<p> Expenses: $<%= @budget.expenses %> </p>
-<p> Excess Income: $<%= excess_income %></p>
-<br>
-<h2>Notes:</h2> 
-<p> <%= @budget.notes %> </p> 
-<br>
-<h2>Transactions:</h2> 
-<%= link_to "Add a New Transaction", new_budget_transaction_path(@budget.id), method:'get'  %> 
-<ul>
-<% current_user.transactions.each do |transaction| %>
-    <li> $<%= link_to transaction.amount, user_transaction_path(current_user, transaction) %>  spent at <%= transaction.store_name %> on <%= transaction.date.strftime('%a, %b %d, %Y') %></li>
-  <% end %>
-</ul>
-<br>
-<h2>Total Spent: $<%= total_spent %> </h3>
-<h2>Remaining Money: $<%= remaining_money %> </h3>
-<br>
+          <table class="striped highlight center">
+            <thead>
+            <th>Store Name</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Category</th>
+          </thead>
 
-<%= link_to "Edit Budget", edit_user_budget_path(current_user), method:'get'  %> | 
-<%= link_to "Delete Budget", @budget, method: :delete, data: { confirm: "Are you sure?", disable_with: "Processing..." } %> 
+          <tbody>
+          <% @transactions.each do |transaction|%>
+              <tr>
+                  <td> <%= transaction.store_name %></td>
+                  <td> $<%= link_to transaction.amount, user_transaction_path(current_user, transaction) %>  spent at <%= transaction.store_name %> on <%= transaction.date.strftime('%a, %b %d, %Y') %></td>
+                  <td> <%= transaction.date.strftime('%a, %b %d, %Y') %></td>
+                  <td> <%= transaction.category %></td>
+              </tr>
+          <% end %>
+
+          </tbody>
+        </table>
+      <% end %>
+</div>        
+
+        

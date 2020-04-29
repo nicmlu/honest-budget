@@ -13,7 +13,6 @@ class BudgetsController < ApplicationController
 
     def create
         @budget = current_user.budgets.build(budget_params)
-        binding.pry
         if @budget.save
            redirect_to budget_path(@budget)
         else 
@@ -24,6 +23,7 @@ class BudgetsController < ApplicationController
     end 
 
     def show 
+        @transactions = current_user.transactions
     end 
 
     def edit
