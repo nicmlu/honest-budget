@@ -1,19 +1,19 @@
 <br>
 <div class="row">
-    <div class="col s6 m4">
+    <div class="center">
       <div class="card grey">
         <div class="card-content white-text">
-          <span class="card-title"><%= @budget.name %> Budget</span>
+          <span class="card-title"><%= @budget.name %> Budget </span>
           <p> Start Date: <%= @budget.start_date.strftime('%b %d, %Y') %> </p>
           <p> End Date: <%= @budget.end_date.strftime('%b %d, %Y') %> </p>
           <br>
-          <p> Income: $<%= @budget.income%> </p>
-          <p> Expenses: $<%= @budget.expenses %> </p>
+          <p> Income: <%= number_to_currency(@budget.income)%> </p>
+          <p> Expenses: <%= number_to_currency(@budget.expenses) %> </p>
           <br>
-          <p> Excess Income: $<%= excess_income %></p>
+          <p> Excess Income: <%= number_to_currency(excess_income) %></p>
           <br>
-          <p> Total Spent: $<%= total_spent %></p>
-          <p> Remaining Income: $<%= remaining_money%></p>
+          <p> Total Spent: <%= number_to_currency(total_spent) %></p>
+          <p> Remaining Income: <%= number_to_currency(remaining_money)%></p>
           <br>
           <p>Notes: <%= @budget.notes %> </p>
         </div>
@@ -25,7 +25,7 @@
       </div>
     </div>
   <% if @transactions == [] %>
-      <div class="col s6 m8">
+      <div class="col s6 m12">
         <div class="card grey">
           <div class="card-content white-text">
             <span class="card-title">You have no transactions stored.</span>
@@ -37,7 +37,7 @@
       </div>
         <% else %>
 
-          <table class="striped highlight center">
+          <table class="centered">
             <thead>
             <th>Store Name</th>
             <th>Amount</th>
@@ -49,9 +49,9 @@
           <% @transactions.each do |transaction|%>
               <tr>
                   <td> <%= transaction.store_name %></td>
-                  <td> $<%= link_to transaction.amount, user_transaction_path(current_user, transaction) %>  spent at <%= transaction.store_name %> on <%= transaction.date.strftime('%a, %b %d, %Y') %></td>
-                  <td> <%= transaction.date.strftime('%a, %b %d, %Y') %></td>
-                  <td> <%= transaction.category %></td>
+                  <td> <%= link_to number_to_currency(transaction.amount), user_transaction_path(current_user, transaction) %> </td>
+                  <td> <%= transaction.date.strftime('%a %b %d, %Y') %></td>
+                  <td> <%= find_transaction_category(transaction.category_id) %></td>
               </tr>
           <% end %>
 

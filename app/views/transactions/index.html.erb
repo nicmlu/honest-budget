@@ -3,8 +3,9 @@
 </div>
 
 <div class="grey-text">
-<h4> Total Spent: $<%= total_spent %> </h4>
+<h4> Total Spent: <%= number_to_currency(total_spent) %> </h4>
 </div>
+<br>
 
 <% if @transactions == [] %>
 <br>
@@ -26,6 +27,19 @@
 
 <% else %>
 
+<div class="grey-text">
+<p> Filter by Category: </p>
+
+<form action="<%= transactions_path %>" method="get">
+  <input type="text" id="category_id" name="transaction[category_id]"><br>
+ 
+  <input type="submit" value="Filter">
+</form>
+
+</div>
+<br>
+<br>
+
 <table class="striped highlight center">
   <thead>
     <th>Store Name</th>
@@ -38,9 +52,9 @@
     <% @transactions.each do |transaction|%>
         <tr>
             <td> <%= transaction.store_name %></td>
-            <td> $<%= link_to transaction.amount, user_transaction_path(current_user, transaction) %>  spent at <%= transaction.store_name %> on <%= transaction.date.strftime('%a, %b %d, %Y') %></td>
-            <td> <%= transaction.date.strftime('%a, %b %d, %Y') %></td>
-            <td> <%= transaction.category %></td>
+            <td> <%= link_to number_to_currency(transaction.amount), user_transaction_path(current_user, transaction)%></td>
+            <td> <%= transaction.date.strftime('%a %b %d, %Y') %></td>
+            <td><%= find_transaction_category(transaction.category_id) %></td>
         </tr>
     <% end %>
 

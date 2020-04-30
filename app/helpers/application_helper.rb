@@ -28,4 +28,9 @@ module ApplicationHelper
     current_user.budgets
   end 
 
+  def find_transaction_category(category_id)
+    @category = Category.find_by_id(category_id)
+    @category.name
+  end 
+
 end

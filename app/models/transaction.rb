@@ -10,8 +10,4 @@ class Transaction < ApplicationRecord
   validates :amount, presence: true 
   validates :date, presence: true 
 
-    # def category_attributes=(category)
-    # self.category = Category.find_or_create_by(name: category[:name])
-    # end 
-
 end

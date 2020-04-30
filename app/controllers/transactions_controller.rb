@@ -3,7 +3,12 @@ class TransactionsController < ApplicationController
     before_action :find_transaction, only: [:show, :edit, :update]
 
     def index 
-        @transactions = current_user.transactions
+        if !params["_method"]
+            @category = Category.find_by(name: params[:transaction][:category_id])
+            @transactions = Transaction.where(category_id: @category.id, user_id: current_user.id)
+        else
+            @transactions = current_user.transactions
+        end 
     end 
 
     def new
@@ -18,12 +23,11 @@ class TransactionsController < ApplicationController
 
     def create  
         @transaction = current_user.transactions.build(transaction_params)
-        
-        
         @budget = Budget.find_by(name: transaction_params[:budget_id])
+        @transaction.budget_id = @budget.id
         @category = Category.find_or_create_by(name: transaction_params[:category_id])
         @category.transactions << @transaction
-        binding.pry
+       
         if @transaction.save
            show_transaction
         else

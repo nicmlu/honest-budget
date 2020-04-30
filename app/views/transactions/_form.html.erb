@@ -14,8 +14,9 @@
 <%= f.date_field :date %><br>
 <br>
 <%= f.label :amount %>
-<%= f.text_field :amount %><br>
+<%= f.number_field :amount, step: :any %><br>
 <br>
+
  <%= f.label "Budget" %>
       <%= f.text_field :budget_id, list: "budget_autocomplete" %>
         <datalist id= "budget_autocomplete"> 

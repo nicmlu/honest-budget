@@ -1,24 +1,45 @@
-# README
+# HonestBudget
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Rails app (built as a Flatiron Portfolio Project) designed to help users create a customized budget, keep track of their everyday expenses and know exactly where there money is going! Users can filter their purchases by category and have an accurate count of remaining money available. 
 
-Things you may want to cover:
+## Getting Started
 
-* Ruby version
+These instructions will get HonestBudget up and running on your computer.
 
-* System dependencies
+### Prerequisites
 
-* Configuration
+Other than the gems listed in this app's Gemfile, you will need to have (Ruby)[https://www.ruby-lang.org/en/downloads/] and [Rails](https://guides.rubyonrails.org/v5.0/getting_started.html) installed on your local machine as well as the ability to install Ruby gems.
 
-* Database creation
+### Installing
 
-* Database initialization
+To run this app locally, fork and clone the [GitHub repo](https://github.com/nicmlu/honest-budget) to your local machine. 
 
-* How to run the test suite
+Change directories into the repo directory. Run bundle install to install dependencies, and rails db:migrate and rails db:seed to create and seed the database. 
+```
+$cd honest-budget 
+$bundle install
+$rails db:migrate
+$rails db:seed
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Run $rails s to start a web server and access the app in a web browser. 
+```
+$rails s
+```
 
-* Deployment instructions
+Use your favorite browser to visit the route displayed in the terminal. (E.g. http://localhost:3000)
 
-* ...
+## Built With
+
+* Rails
+* Ruby 
+* Materialize CSS
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/nicmlu/honest-budget. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant [code of conduct](https://github.com/nicmlu/honest-budget/code_of_conduct.md).
+
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
