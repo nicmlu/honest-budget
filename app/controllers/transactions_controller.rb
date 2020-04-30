@@ -3,13 +3,14 @@ class TransactionsController < ApplicationController
     before_action :find_transaction, only: [:show, :edit, :update]
 
     def index 
-        if !params["_method"]
-            @category = Category.find_by(name: params[:transaction][:category_id])
-            @transactions = Transaction.where(category_id: @category.id, user_id: current_user.id)
-        else
-            @transactions = current_user.transactions
-        end 
+        @transactions = current_user.transactions
     end 
+
+    def find 
+        @category = Category.find_by(name: params[:transaction][:category_id])
+        @transactions = Transaction.by_category(@category, current_user)
+        render :index 
+    end
 
     def new
         if params[:budget_id]  == nil 

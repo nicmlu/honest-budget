@@ -10,4 +10,9 @@ class Transaction < ApplicationRecord
   validates :amount, presence: true 
   validates :date, presence: true 
 
+  scope :by_category, ->(category, user)  { where(category_id: category.id, user_id: user.id) }
+
+
+ 
+
 end

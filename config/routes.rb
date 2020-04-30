@@ -10,6 +10,8 @@ root 'sessions#home'
 
   delete '/logout' => 'sessions#destroy'
 
+  get '/transactions/find' => 'transactions#find'
+
   resources :categories
   resources :transactions
 
