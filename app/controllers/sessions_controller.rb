@@ -12,27 +12,25 @@ class SessionsController < ApplicationController
   end 
    
   def create 
-    if user_params[:email]
-      @user = User.find_by(email: user_params[:email])
-      if @user && @user.authenticate(user_params[:password])
-        log_in(@user)
-      else 
-        flash[:alert] = "Please enter correct login information."
-        redirect_to login_path
-      end 
-    else 
-      if @user = User.find_by(email: auth[:info][:email])
-        log_in(@user)
-      else 
-        @user = User.new(name: auth[:info][:name], email: auth[:info][:email], password: SecureRandom.hex)
-        if @user.save
-          log_in(@user)
-        else 
-          flash[:alert] = "Please enter correct login information."
-          redirect_to login_path
-        end 
-      end 
-    end
+      if auth
+            @user = User.find_or_create_by(email: auth['info']['email'])
+            @user.password = SecureRandom.hex
+            @user.name = auth['info']['name']
+            if @user.save
+                session[:user_id] = @user.id
+                redirect_to @user
+            else
+                redirect_to root_path
+            end
+        else
+            @user = User.find_by(email: params[:email])
+            if @user && @user.authenticate(params[:password])
+                session[:user_id] = @user.id
+                redirect_to @user            
+            else
+                redirect_to login_path, notice: "Please enter a correct username and password"
+            end
+        end
   end 
 
 
