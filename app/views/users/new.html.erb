@@ -3,7 +3,17 @@
 </div>
 <br>
 <%= form_for(@user, url:'/signup') do |f|%>
-<%=render 'layouts/shared_errors', form_object: @user%>
+
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %> 
+      <li class="flash-alert">* <%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= f.label :name %>
 <%= f.text_field :name %>
 <br>
