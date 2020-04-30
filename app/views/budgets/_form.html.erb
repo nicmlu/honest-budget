@@ -3,6 +3,17 @@
 </div>
 
 <%= form_for(@budget) do |f|%>
+
+<% if @budget.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+    <% @budget.errors.full_messages.each do |msg| %> 
+      <li class="flash-alert">* <%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= f.label :name %>
 <%= f.text_field :name %>
 <br>

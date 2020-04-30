@@ -33,4 +33,10 @@ nav {
   background-color: red;
   display: table;
 }
+
+.alert {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
       

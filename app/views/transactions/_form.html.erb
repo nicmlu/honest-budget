@@ -5,6 +5,16 @@
 
 <%= form_for(@transaction) do |f|%> 
 
+<% if @transaction.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+    <% @transaction.errors.full_messages.each do |msg| %> 
+      <li class="flash-alert">* <%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= f.hidden_field :user_id, :value => current_user.id %>
 
 <%= f.label :store_name %>
