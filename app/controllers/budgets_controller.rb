@@ -24,6 +24,10 @@ class BudgetsController < ApplicationController
 
     def show 
         @transactions = current_user.transactions
+        # @budget_start_date = @budget.start_date
+        # @budget_end_date = @budget.end_date
+        # @monthly_transactions = Transaction.where('date' >= @budget_start_date).where('date' >= @budget_start_date)
+        # binding.pry
     end 
 
     def edit
