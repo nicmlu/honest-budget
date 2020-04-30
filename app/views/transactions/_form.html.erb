@@ -14,21 +14,22 @@
 <%= f.date_field :date %><br>
 <br>
 <%= f.label :amount %>
-<%= f.number_field :amount %><br>
+<%= f.text_field :amount %><br>
 <br>
  <%= f.label "Budget" %>
       <%= f.text_field :budget_id, list: "budget_autocomplete" %>
         <datalist id= "budget_autocomplete"> 
             <% user_budgets.each do |budget|%>
-                <option value=" <%= budget.name %> ">
+                <option value="<%= budget.name %>">  </option>
             <%end%>
         </datalist>
+
 <br>
   <%= f.label "Pick an Existing Category or Type in a New Category" %>
       <%= f.text_field :category_id, list: "category_autocomplete" %>
         <datalist id= "category_autocomplete"> 
             <% Category.all.each do |category|%>
-                <option value=" <%= category.name %> ">
+                <option value="<%= category.name %>"> </option>
             <%end%>
         </datalist>
 <br>

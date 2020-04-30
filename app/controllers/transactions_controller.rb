@@ -57,7 +57,7 @@ class TransactionsController < ApplicationController
     private
     
     def transaction_params
-        params.require(:transaction).permit(:store_name, :amount, :date, :user_id, :budget_id, :category_id, :budget, :category, category_attributes: [:name])
+        params.require(:transaction).permit(:store_name, :amount, :date, :user_id, :budget_id, :category_id, category_attributes: [:name], budget_attributes: [:name])
     end 
 
     def find_transaction
