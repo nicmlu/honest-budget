@@ -12,7 +12,4 @@ class Transaction < ApplicationRecord
 
   scope :by_category, ->(category, user)  { where(category_id: category.id, user_id: user.id) }
 
-
- 
-
 end
