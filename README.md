@@ -1,6 +1,6 @@
 # HonestBudget
 
-A Rails app (built as a Flatiron Portfolio Project) designed to help users create a customized budget, keep track of their everyday expenses and know exactly where there money is going! Users can filter their purchases by category and have an accurate count of remaining money available. 
+A Rails app (built as a Flatiron Portfolio Project) designed to help users create a customized budget, keep track of their everyday expenses and know exactly where their money is going! Users can filter their purchases by category and have an accurate count of remaining money available. 
 
 ## Getting Started
 
